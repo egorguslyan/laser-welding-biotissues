@@ -6,10 +6,13 @@
 \setmonofont{Liberation Mono}
 \usepackage{polyglossia}
 \setdefaultlanguage{russian}
-\setotherlanguage{english}
-\usepackage{amsmath,booktabs,tabularx,array,graphicx,tikz,pgfplots}
+\usepackage{amsmath,booktabs,tabularx,array,graphicx,tikz,pgfplots,pgfpages}
 \usetikzlibrary{arrows.meta,positioning,calc}
 \pgfplotsset{compat=1.18}
+% Logical layout stays 160 x 90 mm; the actual PDF page is 11.02 x 6.20 in.
+% All content, including fonts and title coordinates, is scaled together.
+\pgfpagesuselayout{resize to}[physical paper width=11.02in,physical paper height=6.20in]
+\graphicspath{{./}{images/}{figures/}}
 \usefonttheme{professionalfonts}
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{headline}{}
@@ -19,30 +22,27 @@
 \setbeamercolor{itemize item}{fg=black}
 \setbeamercolor{enumerate item}{fg=black}
 \setbeamertemplate{itemize item}{\raisebox{0.2ex}{\scriptsize$\bullet$}}
-\setbeamertemplate{itemize subitem}{--}
-\setbeamertemplate{footline}{\hfill\usebeamerfont{page number in head/foot}\insertframenumber/\inserttotalframenumber\hspace{5mm}\vspace{3mm}}
+\setbeamertemplate{footline}{\hfill\insertframenumber/\inserttotalframenumber\hspace{5mm}\vspace{3mm}}
 \setbeamersize{text margin left=7mm,text margin right=7mm}
 \setlength{\parskip}{3pt}
-\setbeamertemplate{note page}[plain]
 \newcommand{\src}[1]{\par\vspace{1mm}{\fontsize{7}{8}\selectfont Источник: Герасименко А.\,Ю. и др. Известия вузов. Электроника. 2010. №~4(84). #1\par}}
 \newcommand{\smalltext}{\fontsize{9}{10.8}\selectfont}
-\newcommand{\article}{8102.pdf}
-\newcommand{\sourcepanel}[3]{%
-\IfFileExists{\article}{\includegraphics[page=#1,width=\linewidth,height=#2,keepaspectratio]{\article}}{%
-\fbox{\parbox[c][#2][c]{0.93\linewidth}{\centering\small #3\\[2mm]\footnotesize Для воспроизведения рисунка поместите\\\texttt{8102.pdf} рядом с исходником.}}}}
-\tikzset{box/.style={draw,rectangle,align=center,inner sep=4pt,font=\small},arr/.style={-{Stealth[length=2mm]},thick}}
+% Independent per-frame numbering for drawings and equations.
+\BeforeBeginEnvironment{frame}{\setcounter{figure}{0}\setcounter{equation}{0}}
+\newcommand{\figcap}[1]{\par\refstepcounter{figure}{\centering\fontsize{8}{9.5}\selectfont Рис.\thefigure.\ #1\par}\vspace{1mm}}
+% PNGs must be supplied by the author; no PDF fallback and no border.
+\newcommand{\SpectrumImage}{fig4.png}
+\newcommand{\WeldingImage}{fig5.png}
+\newcommand{\pngimage}[2]{\includegraphics[width=\linewidth,height=#2,keepaspectratio]{#1}}
+\tikzset{box/.style={rectangle,align=center,inner sep=4pt,font=\small},arr/.style={-{Stealth[length=2mm]},thick}}
 \begin{document}
-
-% Титульный — первый слайд, учитывается в общем числе, без номера.
 \begin{frame}[plain]
 \begin{tikzpicture}[remember picture,overlay]
-\node[anchor=north,align=center,text width=15.6cm,font=\fontsize{10.5}{12}\selectfont]
- at ([yshift=-3mm]current page.north) {МИНОБРНАУКИ РОССИИ\\[2pt]
+\node[anchor=north,align=center,text width=15.6cm,font=\fontsize{10.5}{12}\selectfont] at ([yshift=-3mm]current page.north) {МИНОБРНАУКИ РОССИИ\\[2pt]
 Федеральное государственное автономное образовательное учреждение высшего образования\\
-«Национальный исследовательский университет\\
-«Московский институт электронной техники»};
-\node[align=center,font=\fontsize{10.5}{12}\selectfont] at ([yshift=-20.8mm]current page.north) {Институт биомедицинских систем};
-\node[align=center,font=\fontsize{17}{20}\selectfont] at ([yshift=-33.8mm]current page.north) {Гуслянцев Егор Евгеньевич};
+«Национальный исследовательский университет\\«Московский институт электронной техники»};
+\node[font=\fontsize{10.5}{12}\selectfont] at ([yshift=-20.8mm]current page.north) {Институт биомедицинских систем};
+\node[font=\fontsize{17}{20}\selectfont] at ([yshift=-33.8mm]current page.north) {Гуслянцев Егор Евгеньевич};
 \node[align=center,text width=14.8cm,font=\bfseries\fontsize{17}{20}\selectfont] at ([yshift=-52mm]current page.north) {Нанокомпозитный припой для лазерной сварки\\биологических тканей};
 \node[anchor=east,font=\fontsize{10.5}{12}\selectfont] at ([xshift=-9mm,yshift=13.8mm]current page.south east) {Руководитель: к.ф.-м.н., доцент Потапов Д.А.};
 \node[font=\fontsize{10.5}{12}\selectfont] at ([yshift=4mm]current page.south) {Москва 2026};
@@ -51,12 +51,10 @@
 
 \begin{frame}{Задача исследования и принцип соединения}
 {\centering\small Нанокомпозитный припой для лазерной сварки биологических тканей\par}
-\vspace{1mm}
 \begin{itemize}
 \item Задача: сравнить прочность соединений при изменении углеродного наполнителя в БСА.
 \item Объекты: свиная кожа и хрящ бычьей трахеи; \textit{in vitro}.
 \end{itemize}
-\vspace{2mm}
 \begin{center}
 \begin{tikzpicture}[node distance=3mm]
 \node[box,text width=29mm](a){Нанесение\\припоя};
@@ -65,9 +63,9 @@
 \node[box,text width=25mm,right=of c](d){Соединение};
 \draw[arr](a)--(b);\draw[arr](b)--(c);\draw[arr](c)--(d);
 \begin{scope}[shift={(5,-1.5)}]
-\draw[fill=black!8](-2,0)rectangle(-0.08,0.45);
-\draw[fill=black!8](0.08,0)rectangle(2,0.45);
-\draw[fill=black!45](-0.08,0)rectangle(0.08,0.65);
+\draw[draw=none,fill=black!8](-2,0)rectangle(-0.08,0.45);
+\draw[draw=none,fill=black!8](0.08,0)rectangle(2,0.45);
+\draw[draw=none,fill=black!45](-0.08,0)rectangle(0.08,0.65);
 \draw[arr](0,1.3)--(0,0.7);
 \node[anchor=west,font=\scriptsize] at (0.2,1.1){Лазерное излучение};
 \node[anchor=east,font=\scriptsize] at (-2.1,0.2){Ткань};
@@ -76,29 +74,27 @@
 \end{scope}
 \end{tikzpicture}
 \end{center}
-\small БСА (бычий сывороточный альбумин) — белковая матрица.\\
-УНТ (углеродные нанотрубки) — поглощение излучения и предполагаемое упрочнение.\\
-Температурный диапазон, указанный авторами как оптимальный: 65–70~°C.
-\par\vspace{1mm}{\fontsize{6.5}{7.5}\selectfont
-Источник: Герасименко А.\,Ю., Губарьков О.\,В., Ичкитидзе Л.\,П., Подгаецкий В.\,М., Селищев С.\,В., Пономарева О.\,В.\\
-Нанокомпозитный припой для лазерной сварки биологических тканей // Известия вузов. Электроника. 2010. №~4(84). С.~33–41.\par}
-\note{Схема условная. Нанотрубочный каркас не изображается как наблюдённая структура. Безрубцовое заживление, стерильность и клиническое превосходство в работе не проверены.}
+\figcap{Принцип соединения биологических тканей с применением лазерного припоя.}
+\smalltext БСА — бычий сывороточный альбумин, белковая матрица.\\
+УНТ — углеродные нанотрубки: поглощение излучения и предполагаемое упрочнение.\\
+Температура, указанная авторами как оптимальная: 65–70~°C.
+\par{\fontsize{6.5}{7.5}\selectfont Источник: Герасименко А.\,Ю., Губарьков О.\,В., Ичкитидзе Л.\,П., Подгаецкий В.\,М., Селищев С.\,В., Пономарева О.\,В. Нанокомпозитный припой для лазерной сварки биологических тканей // Известия вузов. Электроника. 2010. №~4(84). С.~33–41.\par}
+\note{Схема условная. Каркас не показан как наблюдённая структура. Клиническое превосходство, стерильность и безрубцовое заживление в работе не проверены.}
 \end{frame}
 
 \begin{frame}{Составы и приготовление припоев}
 \centering Основная прочностная серия: 28 мас.\,\% БСА;\\0,1 мас.\,\% наполнителя при его наличии.
-\vspace{2mm}
 \smalltext
 \begin{tabularx}{\linewidth}{@{}p{39mm}p{31mm}X@{}}
 \toprule Наполнитель & Обозначение & Характеристика\\\midrule
 Без наполнителя & БСА & Альбуминовый контроль\\
 Сажа К-354 & БСА + сажа & Углеродный контроль\\
-Активированный уголь & БСА + МРАУ & Средний размер частиц $\leq 10$ мкм\\
+Активированный уголь & БСА + МРАУ & Средний размер частиц $\leq10$ мкм\\
 Многослойные УНТ МИЭТ & БСА + МУНТ I & Наружный диаметр 3–30 нм\\
-Многослойные УНТ «Таунит» & БСА + МУНТ II & Диаметр 20–40 нм; средняя длина $\geq 2$ мкм\\
-Однослойные УНТ & БСА + ОУНТ & Средний диаметр $\sim 1$ нм; длина $\sim 1$ мкм\\\bottomrule
+Многослойные УНТ «Таунит» & БСА + МУНТ II & Диаметр 20–40 нм; длина $\geq2$ мкм\\
+Однослойные УНТ & БСА + ОУНТ & Диаметр $\sim1$ нм; длина $\sim1$ мкм\\\bottomrule
 \end{tabularx}
-\vspace{3mm}
+\vspace{2mm}
 \begin{tikzpicture}[node distance=2mm]
 \node[box,text width=19mm,font=\scriptsize](a){БСА + вода};
 \node[box,text width=23mm,font=\scriptsize,right=of a](b){Механическое перемешивание};
@@ -107,156 +103,136 @@
 \node[box,text width=26mm,font=\scriptsize,right=of d](e){УЗ-обработка; контроль температуры};
 \foreach \x/\y in {a/b,b/c,c/d,d/e}\draw[arr](\x)--(\y);
 \end{tikzpicture}
-\par\vspace{2mm}\raggedright\scriptsize
-Описанная процедура приготовления относится к 25\%-ной дисперсии БСА,\newline а не к составу основной прочностной серии.
+\figcap{Последовательность приготовления припоя.}
+\raggedright\scriptsize Описанная процедура относится к 25\%-ной дисперсии БСА, а не к составу основной прочностной серии.
 \src{С.~35–36, 39.}
-\note{25\%-ная дисперсия: 8,33 г БСА на 25 мл воды; 3 ч перемешивания при температуре не выше 30 °C; выдержка 12 ч. Способ перехода к 28\%-ному составу не реконструирован. Спектральные иллюстрации с 0,3 мас.\,\% УНТ относятся к другой серии.}
+\note{8,33 г БСА на 25 мл воды; перемешивание 3 ч при температуре не выше 30 °C; выдержка 12 ч. Способ перехода к 28\%-ному составу не реконструировать.}
 \end{frame}
 
 \begin{frame}{Оптические свойства и стабильность}
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.49\linewidth}
-\small Спектры поглощения припоев с УНТ
-\par\vspace{1mm}
-% Полная исходная страница сохраняет оси, подписи и номера кривых.
-% Для показа крупным планом можно заменить на отдельный файл fig4.pdf.
-\IfFileExists{fig4.pdf}{\includegraphics[width=\linewidth,height=43mm,keepaspectratio]{fig4.pdf}}{\sourcepanel{5}{43mm}{Рис. 4 статьи: спектры поглощения}}
-\par\scriptsize УНТ: 0,3 мас.\,\%; слой 1 мм.\\
-Кривые: 1 — «НаноКарбонЛайт» (ОУНТ);\\2 — «Таунит» (МУНТ II); 3 — МИЭТ (МУНТ I).
+\centering\pngimage{\SpectrumImage}{43mm}
+\figcap{Спектры поглощения припоев с УНТ.}
+\scriptsize УНТ: 0,3 мас.\,\%; слой 1 мм.\\
+1 — «НаноКарбонЛайт» (ОУНТ);\\2 — «Таунит» (МУНТ II); 3 — МИЭТ (МУНТ I).
 \end{column}
 \begin{column}{0.49\linewidth}
 \smalltext
 \begin{tabularx}{\linewidth}{@{}p{18mm}X@{}}
 \toprule Испытание & Условия и наблюдения\\\midrule
 Термо- & 936 ч при комнатной температуре; отдельное испытание при 42~°C. Спектры изменились незначительно.\\[2mm]
-Фото- & Светодиод $\sim$630 нм; 65 мВт; 83 ч. Небольшие изменения спектров после облучения.\\\bottomrule
+Фото- & Светодиод $\sim630$ нм; 65 мВт; 83 ч. Небольшие изменения спектров после облучения.\\\bottomrule
 \end{tabularx}
-\vspace{2mm}
-\scriptsize Серия испытаний стабильности: 25\% БСА + 0,3 мас.\,\% «Таунит».\\[2mm]
-При 42~°C: 85 ч в тексте; 83 ч в подписи к рис.~1.\\[2mm]
+\scriptsize Серия стабильности: 25\% БСА + 0,3 мас.\,\% «Таунит».\\[2mm]
+При 42~°C: 85 ч в тексте; 83 ч в подписи к рис.~1 исходной статьи.\\[2mm]
 \small Оценивались изменения спектров, а не биологическая безопасность.
 \end{column}
 \end{columns}
-\src{С.~36–38, рис.~1, 3, 4.}
-\note{Поглощение ОУНТ ниже, чем «Таунит», а «Таунит» ниже, чем МИЭТ; авторы связывают различия со степенью очистки. Это не доказательство механизма упрочнения. Для резервного обсуждения использовать рис. 1 и 3: слой на рис. 1 — 1 мм; на рис. 3а — 0,1 мм, на рис. 3б — 1 мм. Светодиод 630 нм не эквивалентен сварочному лазеру 970 нм.}
+\src{С.~36–38, рис.~1, 3, 4 исходной статьи.}
+\note{Различия поглощения авторы связывают со степенью очистки УНТ, что не доказывает механизм упрочнения. Светодиод 630 нм не эквивалентен лазеру 970 нм.}
 \end{frame}
 
 \begin{frame}{Лазерная сварка и измерение прочности}
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.47\linewidth}
-\small Облучение хряща и вид соединения
-\par\vspace{1mm}
-\IfFileExists{fig5.pdf}{\includegraphics[width=\linewidth,height=36mm,keepaspectratio]{fig5.pdf}}{\sourcepanel{6}{36mm}{Рис. 5 статьи: облучение и лазерный шов}}
-\par\scriptsize Иллюстративная серия: 25\% БСА +\\0,3 мас.\,\% «Таунит». Чёрный цвет обусловлен припоем.
+\centering\pngimage{\WeldingImage}{36mm}
+\figcap{Лазерная сварка бычьего хряща: (а) облучение образца; (б) вид соединения.}
+\raggedright\scriptsize Иллюстративная серия: 25\% БСА + 0,3 мас.\,\% «Таунит». Чёрный цвет обусловлен припоем.
+\par\vspace{2mm}\smalltext Образцы: 30–33 $\times$ 2–4 $\times$ 0,5–1,5 мм; хранение в формалине.
 \end{column}
 \begin{column}{0.51\linewidth}
-\smalltext Образцы: 30–33 $\times$ 2–4 $\times$ 0,5–1,5 мм; хранение в формалине.\\[1mm]
-Разрез $\rightarrow$ припой $\rightarrow$ фиксация $\rightarrow$ облучение.\\[1mm]
-Непрерывный диодный лазер: 970 нм;\\5–15 Вт на выходе волокна; 2–5 мин.\\[1mm]
+\smalltext Непрерывный диодный лазер: 970 нм; 5–15 Вт на выходе волокна; 2–5 мин.\\
 Контроль ИК-пирометром: 65–70~°C.
 \begin{center}
 \begin{tikzpicture}[x=0.82cm,y=0.8cm]
-\draw[fill=black!30](-2,0)rectangle(-1.6,0.8);
-\draw[fill=black!30](1.6,0)rectangle(2,0.8);
-\draw[fill=black!8](-1.6,0.2)rectangle(1.6,0.6);
+\draw[draw=none,fill=black!30](-2,0)rectangle(-1.6,0.8);
+\draw[draw=none,fill=black!30](1.6,0)rectangle(2,0.8);
+\draw[draw=none,fill=black!8](-1.6,0.2)rectangle(1.6,0.6);
 \draw[very thick](0,0.2)--(0,0.6);
 \draw[arr](-2,0.4)--(-2.9,0.4)node[left]{$F$};
 \draw[arr](2,0.4)--(2.9,0.4)node[right]{$F$};
 \draw[arr](0.7,1.2)node[above,font=\scriptsize]{Сечение $S$}--(0,0.65);
-\node[font=\scriptsize] at(0,-0.2){Растяжение образца};
 \end{tikzpicture}
 \end{center}
-\vspace{-2mm}
-\[\sigma=\frac{F_{\max}}{S}\]
-\vspace{-3mm}\scriptsize Не менее пяти образцов на вариант.\\Контроль — неразрезанная ткань.
+\figcap{Схема измерения прочности при растяжении.}
+\vspace{-3mm}
+\begin{equation}\sigma=\frac{F_{\max}}{S}\end{equation}
+\vspace{-3mm}
+{\centering\scriptsize Формула определения номинального напряжения при разрушении.\par}
+\scriptsize $F_{\max}$ — максимальная сила; $S$ — площадь сечения разреза.\\
+Не менее пяти образцов на вариант. Контроль — неразрезанная ткань.
 \end{column}
 \end{columns}
 \src{С.~37–39.}
-\note{Формула даёт номинальное напряжение при разрушении, а не силу. Плотность мощности без площади пятна не вычисляется. В тексте фотография названа рис. 5; в подписи исходного PDF напечатано «Рис. 4». Здесь сохранена нумерация slides.md, это редакционная несогласованность источника.}
+\note{Без площади пятна плотность мощности не вычисляется. В подписи исходной статьи фотография ошибочно названа рис. 4; в тексте — рис. 5. Номера иллюстраций на слайдах независимы от номеров статьи.}
 \end{frame}
-
 \begin{frame}{Влияние наполнителя на прочность}
 \centering\small 28 мас.\,\% БСА; 0,1 мас.\,\% наполнителя при его наличии.
-\vspace{1mm}
 \begin{columns}[T,onlytextwidth]
-\begin{column}{0.5\linewidth}
-\centering\small Свиная кожа
+\begin{column}{0.49\linewidth}
+\centering (а)
 \begin{tikzpicture}
-\begin{axis}[width=7.45cm,height=4.4cm,xmin=0,xmax=2.5,ymin=-0.6,ymax=5.6,
- ytick={0,1,2,3,4,5},yticklabels={БСА,БСА + сажа,БСА + МРАУ,БСА + МУНТ I,БСА + МУНТ II,БСА + ОУНТ},y dir=reverse,
- tick label style={font=\tiny},xlabel={\scriptsize Прочность, МПа},xtick={0,0.5,1,1.5,2,2.5},
- axis x line*=bottom,axis y line*=left,xmajorgrids,grid style={black!12},bar width=9pt,bar shift=0pt,
- point meta=explicit symbolic,nodes near coords, nodes near coords align={horizontal},
- every node near coord/.append style={font=\tiny,anchor=west,xshift=12pt},
- error bars/x dir=both,error bars/x explicit]
-\addplot[xbar,fill=black!25,draw=black] coordinates {(0.4,0) +- (0.1,0) [0,4]};
-\addplot[xbar,fill=black!45,draw=black] coordinates {(0.3,1) +- (0.1,0) [0,3] (0.2,2) +- (0.1,0) [0,2]};
-\addplot[xbar,fill=black!75,draw=black] coordinates {(1.4,3) +- (0.3,0) [1,4] (1.2,4) +- (0.3,0) [1,2] (0.8,5) +- (0.3,0) [0,8]};
-\end{axis}
-\end{tikzpicture}
-\end{column}
-\begin{column}{0.5\linewidth}
-\centering\small Бычий хрящ
+\begin{axis}[width=7.15cm,height=4.1cm,xmin=0,xmax=2.5,ymin=-0.6,ymax=5.6,y dir=reverse,
+ytick={0,1,2,3,4,5},yticklabels={БСА,БСА + сажа,БСА + МРАУ,БСА + МУНТ I,БСА + МУНТ II,БСА + ОУНТ},
+tick label style={font=\tiny},xlabel={\scriptsize Прочность, МПа},xtick={0,0.5,1,1.5,2,2.5},
+axis x line*=bottom,axis y line*=left,xmajorgrids,grid style={black!12},bar width=9pt,bar shift=0pt,
+error bars/x dir=both,error bars/x explicit]
+\addplot[xbar,fill=black!25,draw=none] coordinates {(0.4,0) +- (0.1,0)};
+\addplot[xbar,fill=black!45,draw=none] coordinates {(0.3,1) +- (0.1,0) (0.2,2) +- (0.1,0)};
+\addplot[xbar,fill=black!75,draw=none] coordinates {(1.4,3) +- (0.3,0) (1.2,4) +- (0.3,0) (0.8,5) +- (0.3,0)};
+\end{axis}\end{tikzpicture}\end{column}
+\begin{column}{0.49\linewidth}
+\centering (б)
 \begin{tikzpicture}
-\begin{axis}[width=7.45cm,height=4.4cm,xmin=0,xmax=2.5,ymin=-0.6,ymax=5.6,
- ytick={0,1,2,3,4,5},yticklabels={БСА,БСА + сажа,БСА + МРАУ,БСА + МУНТ I,БСА + МУНТ II,БСА + ОУНТ},y dir=reverse,
- tick label style={font=\tiny},xlabel={\scriptsize Прочность, МПа},xtick={0,0.5,1,1.5,2,2.5},
- axis x line*=bottom,axis y line*=left,xmajorgrids,grid style={black!12},bar width=9pt,bar shift=0pt,
- point meta=explicit symbolic,nodes near coords,nodes near coords align={horizontal},
- every node near coord/.append style={font=\tiny,anchor=west,xshift=14pt},
- error bars/x dir=both,error bars/x explicit]
-\addplot[xbar,fill=black!25,draw=black] coordinates {(0.9,0) +- (0.3,0) [0,9]};
-\addplot[xbar,fill=black!45,draw=black] coordinates {(0.6,1) +- (0.2,0) [0,6] (0.5,2) +- (0.2,0) [0,5]};
-\addplot[xbar,fill=black!75,draw=black] coordinates {(1.9,3) +- (0.5,0) [1,9] (1.4,4) +- (0.4,0) [1,4] (1.7,5) +- (0.5,0) [1,7]};
-\end{axis}
-\end{tikzpicture}
-\end{column}
+\begin{axis}[width=7.15cm,height=4.1cm,xmin=0,xmax=2.5,ymin=-0.6,ymax=5.6,y dir=reverse,
+ytick={0,1,2,3,4,5},yticklabels={БСА,БСА + сажа,БСА + МРАУ,БСА + МУНТ I,БСА + МУНТ II,БСА + ОУНТ},
+tick label style={font=\tiny},xlabel={\scriptsize Прочность, МПа},xtick={0,0.5,1,1.5,2,2.5},
+axis x line*=bottom,axis y line*=left,xmajorgrids,grid style={black!12},bar width=9pt,bar shift=0pt,
+error bars/x dir=both,error bars/x explicit]
+\addplot[xbar,fill=black!25,draw=none] coordinates {(0.9,0) +- (0.3,0)};
+\addplot[xbar,fill=black!45,draw=none] coordinates {(0.6,1) +- (0.2,0) (0.5,2) +- (0.2,0)};
+\addplot[xbar,fill=black!75,draw=none] coordinates {(1.9,3) +- (0.5,0) (1.4,4) +- (0.4,0) (1.7,5) +- (0.5,0)};
+\end{axis}\end{tikzpicture}\end{column}
 \end{columns}
-\vspace{-2mm}\raggedright\small УНТ повышают среднюю прочность относительно БСА; сажа и МРАУ её снижают.
-\par\scriptsize Интервалы $\pm$ воспроизведены из статьи; их статистический смысл не указан.\\Статистическое превосходство отдельных нанотрубочных составов не установлено.
+\figcap{Влияние наполнителя на прочность соединений: (а) свиная кожа; (б) бычий хрящ. Интервалы $\pm$ приведены по статье.}
+\raggedright\small УНТ повышают среднюю прочность относительно БСА; сажа и МРАУ её снижают.
+\par\scriptsize Статистический смысл интервалов $\pm$ не указан. Статистическое превосходство отдельных нанотрубочных составов не установлено.
 \src{С.~39, таблица.}
-\note{Не обозначать интервалы как стандартное отклонение, стандартную ошибку или доверительный интервал. Проверка значимости в статье не представлена. Данные цитируемых работ с другими тканями и лазерами не включены.}
 \end{frame}
-
 \begin{frame}{Сравнение с прочностью исходной ткани}
 \centering\small Доля прочности контрольной ткани: $100\,\sigma/\sigma_{\text{т}}$.
-\vspace{1mm}
 \begin{columns}[T,onlytextwidth]
-\begin{column}{0.5\linewidth}
-\centering\small Свиная кожа
-\begin{tikzpicture}
-\begin{axis}[width=7.3cm,height=4.3cm,xmin=0,xmax=100,ymin=-0.6,ymax=2.6,y dir=reverse,
- ytick={0,1,2},yticklabels={БСА,БСА + МУНТ I,Ткань},tick label style={font=\scriptsize},
- xlabel={\scriptsize Доля прочности ткани, \%},xtick={0,25,50,75,100},axis x line*=bottom,axis y line*=left,
- xmajorgrids,grid style={black!12},bar width=15pt,bar shift=0pt]
-\addplot[xbar,fill=black!25] coordinates {(2.7,0)};
-\addplot[xbar,fill=black!75] coordinates {(9.3,1)};
-\addplot[xbar,fill=white,draw=black] coordinates {(100,2)};
-\node[anchor=west,font=\tiny] at(axis cs:5,0){2,7\%; $0{,}4\pm0{,}1$ МПа};
-\node[anchor=west,font=\tiny] at(axis cs:12,1){9,3\%; $1{,}4\pm0{,}3$ МПа};
+\begin{column}{0.49\linewidth}
+\centering (а)
+\begin{tikzpicture}\begin{axis}[width=7.15cm,height=4.1cm,xmin=0,xmax=100,ymin=-0.6,ymax=2.6,y dir=reverse,
+ytick={0,1,2},yticklabels={БСА,БСА + МУНТ I,Ткань},tick label style={font=\scriptsize},
+xlabel={\scriptsize Доля прочности ткани, \%},xtick={0,25,50,75,100},axis x line*=bottom,axis y line*=left,
+xmajorgrids,grid style={black!12},bar width=15pt,bar shift=0pt]
+\addplot[xbar,fill=black!25,draw=none] coordinates {(2.7,0)};
+\node[anchor=west,font=\tiny] at(axis cs:5.7,0){2,7\%; $0{,}4\pm0{,}1$ МПа};
+\addplot[xbar,fill=black!75,draw=none] coordinates {(9.3,1)};
+\node[anchor=west,font=\tiny] at(axis cs:12.3,1){9,3\%; $1{,}4\pm0{,}3$ МПа};
+\addplot[xbar,fill=black!10,draw=none] coordinates {(100,2)};
 \node[font=\tiny] at(axis cs:53,2){100\%; $15\pm5$ МПа};
-\end{axis}
-\end{tikzpicture}
-\end{column}
-\begin{column}{0.5\linewidth}
-\centering\small Бычий хрящ
-\begin{tikzpicture}
-\begin{axis}[width=7.3cm,height=4.3cm,xmin=0,xmax=100,ymin=-0.6,ymax=2.6,y dir=reverse,
- ytick={0,1,2},yticklabels={БСА,БСА + МУНТ I,Ткань},tick label style={font=\scriptsize},
- xlabel={\scriptsize Доля прочности ткани, \%},xtick={0,25,50,75,100},axis x line*=bottom,axis y line*=left,
- xmajorgrids,grid style={black!12},bar width=15pt,bar shift=0pt]
-\addplot[xbar,fill=black!25] coordinates {(15,0)};
-\addplot[xbar,fill=black!75] coordinates {(32,1)};
-\addplot[xbar,fill=white,draw=black] coordinates {(100,2)};
+\end{axis}\end{tikzpicture}\end{column}
+\begin{column}{0.49\linewidth}
+\centering (б)
+\begin{tikzpicture}\begin{axis}[width=7.15cm,height=4.1cm,xmin=0,xmax=100,ymin=-0.6,ymax=2.6,y dir=reverse,
+ytick={0,1,2},yticklabels={БСА,БСА + МУНТ I,Ткань},tick label style={font=\scriptsize},
+xlabel={\scriptsize Доля прочности ткани, \%},xtick={0,25,50,75,100},axis x line*=bottom,axis y line*=left,
+xmajorgrids,grid style={black!12},bar width=15pt,bar shift=0pt]
+\addplot[xbar,fill=black!25,draw=none] coordinates {(15,0)};
 \node[anchor=west,font=\tiny] at(axis cs:18,0){15\%; $0{,}9\pm0{,}3$ МПа};
+\addplot[xbar,fill=black!75,draw=none] coordinates {(32,1)};
 \node[anchor=west,font=\tiny] at(axis cs:35,1){32\%; $1{,}9\pm0{,}5$ МПа};
+\addplot[xbar,fill=black!10,draw=none] coordinates {(100,2)};
 \node[font=\tiny] at(axis cs:53,2){100\%; $6\pm2$ МПа};
-\end{axis}
-\end{tikzpicture}
-\end{column}
+\end{axis}\end{tikzpicture}\end{column}
 \end{columns}
-\vspace{1mm}\raggedright\small Упрочнение относительно БСА не означает достижения прочности исходной ткани.
-\par\scriptsize Проценты приведены по таблице статьи. Контроль — неразрезанная ткань,\\а не соединение хирургическим швом. Заживление не исследовалось.
+\figcap{Прочность соединений относительно контрольной ткани: (а) свиная кожа; (б) бычий хрящ. Указаны доля прочности и абсолютные значения.}
+\raggedright\small Упрочнение относительно БСА не означает достижения прочности исходной ткани.
+\par\scriptsize Проценты приведены по таблице статьи. Контроль — неразрезанная ткань, а не хирургический шов. Заживление не исследовалось.
 \src{С.~39, таблица.}
 \end{frame}
 
@@ -273,27 +249,28 @@
 \begin{column}{0.49\linewidth}
 \centering\textbf{Гипотеза авторов}\par
 \begin{tikzpicture}[node distance=3mm]
-\node[box,text width=58mm,font=\small](a){Лазерная обработка};
-\node[box,text width=58mm,font=\small,below=of a](b){Структурирование УНТ};
-\node[box,text width=58mm,font=\small,below=of b](c){Каркас с взаимодействующим альбумином};
-\node[box,text width=58mm,font=\small,below=of c](d){Упрочнение слоя};
+\node[box,text width=58mm](a){Лазерная обработка};
+\node[box,text width=58mm,below=of a](b){Структурирование УНТ};
+\node[box,text width=58mm,below=of b](c){Каркас с взаимодействующим альбумином};
+\node[box,text width=58mm,below=of c](d){Упрочнение слоя};
 \foreach \x/\y in {a/b,b/c,c/d}\draw[arr,dashed](\x)--(\y);
 \end{tikzpicture}
+\figcap{Предполагаемая последовательность упрочнения слоя припоя.}
 \end{column}
 \end{columns}
-\vspace{3mm}\small Прямого подтверждения каркаса в данной работе не представлено.
-\par\small Механические измерения не разделяют вклад поглощения, нагрева и армирования.
+\vspace{2mm}\small Прямого подтверждения каркаса в данной работе не представлено.
+\par Механические измерения не разделяют вклад поглощения, нагрева и армирования.
 \src{С.~39–40.}
-\note{Схема является моделью, а не микрофотографией или результатом наблюдения самосборки. Авторы отмечают возможную недостаточность предложенной физической картины.}
+\note{Схема — модель, а не экспериментальная микрофотография. Авторы отмечают возможную недостаточность предложенного объяснения.}
 \end{frame}
 
 \begin{frame}{Ограничения и результаты}
 \smalltext
 \begin{tabularx}{\linewidth}{@{}p{74mm}X@{}}
 \toprule Ограничение & Следствие\\\midrule
-\textit{In vitro}; ткани хранились в формалине & Нет прямого переноса на живые ткани\\[1mm]
+\textit{In vitro}; хранение в формалине & Нет прямого переноса на живые ткани\\[1mm]
 Режим облучения менялся с составом & Сравнивается сочетание состава и обработки\\[1mm]
-Не менее пяти образцов; смысл $\pm$ не уточнён; нет проверки значимости & Не установлено статистическое превосходство составов\\[1mm]
+Не менее пяти образцов; смысл $\pm$ не уточнён; нет проверки значимости & Статистическое превосходство составов не установлено\\[1mm]
 Нет оценки биологической реакции, герметичности, циклической и длительной прочности & Клиническая применимость не установлена\\\bottomrule
 \end{tabularx}
 \vspace{2mm}
@@ -303,6 +280,6 @@
 \item Следующие задачи: сопоставимые режимы облучения, проверка структуры, исследования на живых тканях.
 \end{enumerate}
 \src{С.~37–40.}
-\note{Отсутствие испытаний не доказывает небезопасность. Не утверждать клиническую готовность или превосходство над хирургическим швом. Слайд остаётся на экране во время вопросов.}
+\note{Отсутствие испытаний не доказывает небезопасность. Клиническая готовность и превосходство над хирургическим швом не установлены.}
 \end{frame}
 \end{document}
