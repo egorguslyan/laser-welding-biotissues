@@ -35,14 +35,19 @@
 \begin{document}
 \begin{frame}[plain]
 \begin{tikzpicture}[remember picture,overlay]
-\node[anchor=north,align=center,text width=15.6cm,font=\fontsize{10.5}{12}\selectfont] at ([yshift=-3mm]current page.north) {МИНОБРНАУКИ РОССИИ\\[2pt]
-Федеральное государственное автономное образовательное учреждение высшего образования\\
-«Национальный исследовательский университет\\«Московский институт электронной техники»};
-\node[font=\fontsize{10.5}{12}\selectfont] at ([yshift=-20.8mm]current page.north) {Институт биомедицинских систем};
-\node[font=\fontsize{17}{20}\selectfont] at ([yshift=-33.8mm]current page.north) {Гуслянцев Егор Евгеньевич};
-\node[align=center,text width=14.8cm,font=\bfseries\fontsize{17}{20}\selectfont] at ([yshift=-52mm]current page.north) {Нанокомпозитный припой для лазерной сварки\\биологических тканей};
-\node[anchor=east,font=\fontsize{10.5}{12}\selectfont] at ([xshift=-9mm,yshift=13.8mm]current page.south east) {Руководитель: к.ф.-м.н., доцент Потапов Д.А.};
-\node[font=\fontsize{10.5}{12}\selectfont] at ([yshift=4mm]current page.south) {Москва 2026};
+% Apply typography inside each box; keep the institutional header on fixed lines.
+\node[anchor=north,inner sep=0pt] at ([yshift=-3.3mm]current page.north) {\parbox{\dimexpr\paperwidth-12mm\relax}{\centering\fontsize{8.5}{10.2}\selectfont\setlength{\parskip}{0pt}%
+\mbox{МИНОБРНАУКИ РОССИИ}\\[2pt]
+\mbox{Федеральное государственное автономное образовательное учреждение высшего образования}\\
+\mbox{«Национальный исследовательский университет}\\
+\mbox{«Московский институт электронной техники»}\par}};
+\node[inner sep=0pt] at ([yshift=-20.8mm]current page.north) {{\fontsize{8.5}{10.2}\selectfont Институт биомедицинских систем}};
+\node[inner sep=0pt] at ([yshift=-33.8mm]current page.north) {{\fontsize{14}{17}\selectfont Гуслянцев Егор Евгеньевич}};
+\node[inner sep=0pt] at ([yshift=-52mm]current page.north) {\parbox{\dimexpr\paperwidth-12mm\relax}{\centering\fontsize{15}{17.5}\selectfont\bfseries\setlength{\parskip}{0pt}%
+\mbox{Нанокомпозитный припой для лазерной сварки}\\
+\mbox{биологических тканей}\par}};
+\node[anchor=east,inner sep=0pt] at ([xshift=-9mm,yshift=13.8mm]current page.south east) {{\fontsize{8.5}{10.2}\selectfont Руководитель: к.ф.-м.н., доцент Потапов Д.А.}};
+\node[inner sep=0pt] at ([yshift=4mm]current page.south) {{\fontsize{8.5}{10.2}\selectfont Москва 2026}};
 \end{tikzpicture}
 \end{frame}
 
