@@ -87,6 +87,7 @@
 \begin{frame}{Составы и приготовление припоев}
 \centering Основная прочностная серия: 28 мас.\,\% БСА;\\0,1 мас.\,\% наполнителя при его наличии.
 \smalltext
+\vspace{2mm}
 \begin{tabularx}{\linewidth}{@{}p{39mm}p{31mm}X@{}}
 \toprule Наполнитель & Обозначение & Характеристика\\\midrule
 Без наполнителя & БСА & Альбуминовый контроль\\
@@ -96,8 +97,7 @@
 Многослойные УНТ «Таунит» & БСА + МУНТ II & Диаметр 20–40 нм; длина $\geq2$ мкм\\
 Однослойные УНТ & БСА + ОУНТ & Диаметр $\sim1$ нм; длина $\sim1$ мкм\\\bottomrule
 \end{tabularx}
-\vspace{2mm}
-\begin{tikzpicture}[node distance=2mm]
+\begin{tikzpicture}[node distance=2mm,every node/.append style={draw=black,rectangle,line width=0.4pt}]
 \node[box,text width=19mm,font=\scriptsize](a){БСА + вода};
 \node[box,text width=23mm,font=\scriptsize,right=of a](b){Механическое перемешивание};
 \node[box,text width=35mm,font=\scriptsize,right=of b](c){Декантирование, выдержка, фильтрование};
