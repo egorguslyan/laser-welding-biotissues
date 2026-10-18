@@ -88,14 +88,29 @@
 \centering Основная прочностная серия: 28 мас.\,\% БСА;\\0,1 мас.\,\% наполнителя при его наличии.
 \smalltext
 \vspace{2mm}
-\begin{tabularx}{\linewidth}{@{}p{39mm}p{31mm}X@{}}
-\toprule Наполнитель & Обозначение & Характеристика\\\midrule
-Без наполнителя & БСА & Альбуминовый контроль\\
-Сажа К-354 & БСА + сажа & Углеродный контроль\\
-Активированный уголь & БСА + МРАУ & Средний размер частиц $\leq10$ мкм\\
-Многослойные УНТ МИЭТ & БСА + МУНТ I & Наружный диаметр 3–30 нм\\
-Многослойные УНТ «Таунит» & БСА + МУНТ II & Диаметр 20–40 нм; длина $\geq2$ мкм\\
-Однослойные УНТ & БСА + ОУНТ & Диаметр $\sim1$ нм; длина $\sim1$ мкм\\\bottomrule
+\begin{tabularx}{\linewidth}{|
+  >{\raggedright\arraybackslash}p{39mm}|
+  >{\raggedright\arraybackslash}p{31mm}|
+  >{\raggedright\arraybackslash}X|}
+\hline
+Наполнитель & Обозначение & Характеристика \\
+\hline
+Без наполнителя & БСА & Альбуминовый контроль \\
+\hline
+Сажа К-354 & БСА + сажа & Углеродный контроль \\
+\hline
+Активированный уголь & БСА + МРАУ &
+Средний размер частиц $\leq10$ мкм \\
+\hline
+Многослойные УНТ МИЭТ & БСА + МУНТ I &
+Наружный диаметр 3–30 нм \\
+\hline
+Многослойные УНТ «Таунит» & БСА + МУНТ II &
+Диаметр 20–40 нм; длина $\geq2$ мкм \\
+\hline
+Однослойные УНТ & БСА + ОУНТ &
+Диаметр $\sim1$ нм; длина $\sim1$ мкм \\
+\hline
 \end{tabularx}
 \begin{tikzpicture}[node distance=2mm,every node/.append style={draw=black,rectangle,line width=0.4pt}]
 \node[box,text width=19mm,font=\scriptsize](a){БСА + вода};
@@ -121,10 +136,21 @@
 \end{column}
 \begin{column}{0.49\linewidth}
 \smalltext
-\begin{tabularx}{\linewidth}{@{}p{18mm}X@{}}
-\toprule Испытание & Условия и наблюдения\\\midrule
-Термо- & 936 ч при комнатной температуре; отдельное испытание при 42~°C. Спектры изменились незначительно.\\[2mm]
-Фото- & Светодиод $\sim630$ нм; 65 мВт; 83 ч. Небольшие изменения спектров после облучения.\\\bottomrule
+\begin{tabularx}{\linewidth}{|
+  >{\raggedright\arraybackslash}p{18mm}|
+  >{\raggedright\arraybackslash}X|}
+\hline
+Испытание & Условия и наблюдения \\
+\hline
+Термо- &
+936 ч при комнатной температуре;
+отдельное испытание при 42~°C.
+Спектры изменились незначительно. \\
+\hline
+Фото- &
+Светодиод $\sim630$ нм; 65 мВт; 83 ч.
+Небольшие изменения спектров после облучения. \\
+\hline
 \end{tabularx}
 \scriptsize Серия стабильности: 25\% БСА + 0,3 мас.\,\% «Таунит».\\[2mm]
 При 42~°C: 85 ч в тексте; 83 ч в подписи к рис.~1 исходной статьи.\\[2mm]
@@ -219,7 +245,9 @@ error bars/x dir=both,error bars/x explicit]
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.49\linewidth}
 \centering (а)
-\begin{tikzpicture}\begin{axis}[width=7.15cm,height=4.1cm,xmin=0,xmax=100,ymin=-0.6,ymax=2.6,y dir=reverse,
+\resizebox{0.98\linewidth}{!}{%
+\begin{tikzpicture}
+\begin{axis}[width=7.15cm,height=4.1cm,xmin=0,xmax=100,ymin=-0.6,ymax=2.6,y dir=reverse,
 ytick={0,1,2},yticklabels={БСА,БСА + МУНТ I,Ткань},tick label style={font=\scriptsize},
 xlabel={\scriptsize Доля прочности ткани, \%},xtick={0,25,50,75,100},axis x line*=bottom,axis y line*=left,
 xmajorgrids,grid style={black!12},bar width=15pt,bar shift=0pt]
@@ -229,10 +257,16 @@ xmajorgrids,grid style={black!12},bar width=15pt,bar shift=0pt]
 \node[anchor=west,font=\tiny] at(axis cs:12.3,1){9,3\%; $1{,}4\pm0{,}3$ МПа};
 \addplot[xbar,fill=black!10,draw=none] coordinates {(100,2)};
 \node[font=\tiny] at(axis cs:53,2){100\%; $15\pm5$ МПа};
-\end{axis}\end{tikzpicture}\end{column}
+\end{axis}
+\end{tikzpicture}%
+}
+\par
+\end{column}
 \begin{column}{0.49\linewidth}
 \centering (б)
-\begin{tikzpicture}\begin{axis}[width=7.15cm,height=4.1cm,xmin=0,xmax=100,ymin=-0.6,ymax=2.6,y dir=reverse,
+\resizebox{0.98\linewidth}{!}{%
+\begin{tikzpicture}
+\begin{axis}[width=7.15cm,height=4.1cm,xmin=0,xmax=100,ymin=-0.6,ymax=2.6,y dir=reverse,
 ytick={0,1,2},yticklabels={БСА,БСА + МУНТ I,Ткань},tick label style={font=\scriptsize},
 xlabel={\scriptsize Доля прочности ткани, \%},xtick={0,25,50,75,100},axis x line*=bottom,axis y line*=left,
 xmajorgrids,grid style={black!12},bar width=15pt,bar shift=0pt]
@@ -242,7 +276,11 @@ xmajorgrids,grid style={black!12},bar width=15pt,bar shift=0pt]
 \node[anchor=west,font=\tiny] at(axis cs:35,1){32\%; $1{,}9\pm0{,}5$ МПа};
 \addplot[xbar,fill=black!10,draw=none] coordinates {(100,2)};
 \node[font=\tiny] at(axis cs:53,2){100\%; $6\pm2$ МПа};
-\end{axis}\end{tikzpicture}\end{column}
+\end{axis}
+\end{tikzpicture}%
+}
+\par
+\end{column}
 \end{columns}
 \figcap{Прочность соединений относительно контрольной ткани: (а) свиная кожа; (б) бычий хрящ. Указаны доля прочности и абсолютные значения.}
 \raggedright\small Упрочнение относительно БСА не означает достижения прочности исходной ткани.
@@ -280,12 +318,27 @@ xmajorgrids,grid style={black!12},bar width=15pt,bar shift=0pt]
 
 \begin{frame}{Ограничения и результаты}
 \smalltext
-\begin{tabularx}{\linewidth}{@{}p{74mm}X@{}}
-\toprule Ограничение & Следствие\\\midrule
-\textit{In vitro}; хранение в формалине & Нет прямого переноса на живые ткани\\[1mm]
-Режим облучения менялся с составом & Сравнивается сочетание состава и обработки\\[1mm]
-Не менее пяти образцов; смысл $\pm$ не уточнён; нет проверки значимости & Статистическое превосходство составов не установлено\\[1mm]
-Нет оценки биологической реакции, герметичности, циклической и длительной прочности & Клиническая применимость не установлена\\\bottomrule
+\begin{tabularx}{\linewidth}{|
+  >{\raggedright\arraybackslash}p{74mm}|
+  >{\raggedright\arraybackslash}X|}
+\hline
+Ограничение & Следствие \\
+\hline
+\textit{In vitro}; хранение в формалине &
+Нет прямого переноса на живые ткани \\
+\hline
+Режим облучения менялся с составом &
+Сравнивается сочетание состава и обработки \\
+\hline
+Не менее пяти образцов;
+смысл $\pm$ не уточнён;
+нет проверки значимости &
+Статистическое превосходство составов не установлено \\
+\hline
+Нет оценки биологической реакции,
+герметичности, циклической и длительной прочности &
+Клиническая применимость не установлена \\
+\hline
 \end{tabularx}
 \vspace{2mm}
 \begin{enumerate}
