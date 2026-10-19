@@ -130,9 +130,10 @@
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.49\linewidth}
 \centering\pngimage{\SpectrumImage}{43mm}
-\figcap{Спектры поглощения припоев с УНТ.}
 \scriptsize УНТ: 0,3 мас.\,\%; слой 1 мм.\\
 1 — «НаноКарбонЛайт» (ОУНТ);\\2 — «Таунит» (МУНТ II); 3 — МИЭТ (МУНТ I).
+\vspace{2mm}
+\figcap{Спектры поглощения припоев с УНТ.}
 \end{column}
 \begin{column}{0.49\linewidth}
 \smalltext
@@ -140,7 +141,7 @@
   >{\raggedright\arraybackslash}p{18mm}|
   >{\raggedright\arraybackslash}X|}
 \hline
-Испытание & Условия и наблюдения \\
+\textbf{Испытание} & \textbf{Условия и наблюдения} \\
 \hline
 Термо- &
 936 ч при комнатной температуре;
@@ -165,9 +166,19 @@
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.47\linewidth}
 \centering\pngimage{\WeldingImage}{36mm}
-\figcap{Лазерная сварка бычьего хряща: (а) облучение образца; (б) вид соединения.}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.45\linewidth}
+\centering\small (а)
+\end{column}
+\begin{column}{0.55\linewidth}
+\centering\small (б)
+\end{column}
+\end{columns}
+\vspace{2mm}
 \raggedright\scriptsize Иллюстративная серия: 25\% БСА + 0,3 мас.\,\% «Таунит». Чёрный цвет обусловлен припоем.
 \par\vspace{2mm}\smalltext Образцы: 30–33 $\times$ 2–4 $\times$ 0,5–1,5 мм; хранение в формалине.
+\vspace{2mm}
+\figcap{Лазерная сварка бычьего хряща: (а) облучение образца; (б) вид соединения.}
 \end{column}
 \begin{column}{0.51\linewidth}
 \smalltext Непрерывный диодный лазер: 970 нм; 5–15 Вт на выходе волокна; 2–5 мин.\\
@@ -207,6 +218,7 @@ $S$ — площадь сечения разреза.\\
 \src{С.~37–39.}
 \note{Без площади пятна плотность мощности не вычисляется. В подписи исходной статьи фотография ошибочно названа рис. 4; в тексте — рис. 5. Номера иллюстраций на слайдах независимы от номеров статьи.}
 \end{frame}
+
 \begin{frame}{Влияние наполнителя на прочность}
 \centering\small 28 мас.\,\% БСА; 0,1 мас.\,\% наполнителя при его наличии.
 \begin{columns}[T,onlytextwidth]
@@ -235,9 +247,9 @@ error bars/x dir=both,error bars/x explicit]
 \addplot[xbar,fill=black!75,draw=none] coordinates {(1.9,3) +- (0.5,0) (1.4,4) +- (0.4,0) (1.7,5) +- (0.5,0)};
 \end{axis}\end{tikzpicture}\end{column}
 \end{columns}
-\figcap{Влияние наполнителя на прочность соединений: (а) свиная кожа; (б) бычий хрящ. Интервалы $\pm$ приведены по статье.}
+\figcap{Влияние наполнителя на прочность соединений: (а) свиная кожа; (б) бычий хрящ.}
 \raggedright\small УНТ повышают среднюю прочность относительно БСА; сажа и МРАУ её снижают.
-\par\scriptsize Статистический смысл интервалов $\pm$ не указан. Статистическое превосходство отдельных нанотрубочных составов не установлено.
+\par\scriptsize Статистический смысл интервалов разброса не указан. Статистическое превосходство отдельных нанотрубочных составов не установлено.
 \src{С.~39, таблица.}
 \end{frame}
 \begin{frame}{Сравнение с прочностью исходной ткани}
@@ -322,7 +334,7 @@ xmajorgrids,grid style={black!12},bar width=15pt,bar shift=0pt]
   >{\raggedright\arraybackslash}p{74mm}|
   >{\raggedright\arraybackslash}X|}
 \hline
-Ограничение & Следствие \\
+\textbf{Ограничение} & \textbf{Следствие} \\
 \hline
 \textit{In vitro}; хранение в формалине &
 Нет прямого переноса на живые ткани \\
@@ -340,7 +352,9 @@ xmajorgrids,grid style={black!12},bar width=15pt,bar shift=0pt]
 Клиническая применимость не установлена \\
 \hline
 \end{tabularx}
+\par
 \vspace{2mm}
+\par\textbf{Результаты:}
 \begin{enumerate}
 \item УНТ повышают среднюю прочность относительно БСА в исследованных условиях.
 \item Наибольшие средние значения — с МУНТ I: 1,4 МПа для кожи и 1,9 МПа для хряща; 9,3\% и 32\% прочности контрольных тканей.
