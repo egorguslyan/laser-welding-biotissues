@@ -6,10 +6,8 @@
 \setmonofont{Liberation Mono}
 \usepackage{polyglossia}
 \setdefaultlanguage{russian}
-\usepackage{amsmath,booktabs,tabularx,array,graphicx,tikz,pgfplots,pgfpages}
+\usepackage{amsmath,booktabs,tabularx,array,tikz,pgfpages}
 \usetikzlibrary{arrows.meta,positioning,calc}
-\pgfplotsset{compat=1.18}
-\graphicspath{{./}{images/}{figures/}}
 \usefonttheme{professionalfonts}
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{headline}{}
@@ -18,346 +16,226 @@
 \setbeamercolor{frametitle}{fg=black,bg=white}
 \setbeamercolor{itemize item}{fg=black}
 \setbeamercolor{enumerate item}{fg=black}
-\setbeamertemplate{itemize item}{\raisebox{0.2ex}{\scriptsize$\bullet$}}
 \setbeamertemplate{footline}{\hfill\insertframenumber/\inserttotalframenumber\hspace{5mm}\vspace{3mm}}
 \setbeamersize{text margin left=7mm,text margin right=7mm}
 \setlength{\parskip}{3pt}
-\newcommand{\src}[1]{\par\vspace{1mm}{\fontsize{7}{8}\selectfont Источник: Герасименко А.\,Ю. и др. Известия вузов. Электроника. 2010. №~4(84). #1\par}}
-\newcommand{\smalltext}{\fontsize{9}{10.8}\selectfont}
-% Independent per-frame numbering for drawings and equations.
-\BeforeBeginEnvironment{frame}{\setcounter{figure}{0}\setcounter{equation}{0}}
-\newcommand{\figcap}[1]{\par\refstepcounter{figure}{\centering\fontsize{8}{9.5}\selectfont Рис.\thefigure.\ #1\par}\vspace{1mm}}
-% PNGs must be supplied by the author; no PDF fallback and no border.
-\newcommand{\SpectrumImage}{fig4.png}
-\newcommand{\WeldingImage}{fig5.png}
-\newcommand{\pngimage}[2]{\includegraphics[width=\linewidth,height=#2,keepaspectratio]{#1}}
-\tikzset{box/.style={rectangle,align=center,inner sep=4pt,font=\small},arr/.style={-{Stealth[length=2mm]},thick}}
+\newcommand{\src}[1]{\par\vspace{1mm}{\fontsize{7}{8}\selectfont Источник: патент RU 2510710 C1, 10.04.2014. #1\par}}
+\newcommand{\smalltext}{\fontsize{9}{11}\selectfont}
+\newcommand{\figcap}[1]{\par\vspace{1mm}{\centering\fontsize{8}{9.5}\selectfont Рис. 1. #1\par}}
+\tikzset{box/.style={draw,rectangle,align=center,inner sep=5pt,font=\small},arr/.style={-{Stealth[length=2mm]},thick}}
 \begin{document}
 \begin{frame}[plain]
 \begin{tikzpicture}[remember picture,overlay]
-% Apply typography inside each box; keep the institutional header on fixed lines.
-\node[anchor=north,inner sep=0pt] at ([yshift=-3.3mm]current page.north) {\parbox{\dimexpr\paperwidth-12mm\relax}{\centering\fontsize{8.5}{10.2}\selectfont\setlength{\parskip}{0pt}%
-\mbox{МИНОБРНАУКИ РОССИИ}\\[2pt]
-\mbox{Федеральное государственное автономное образовательное учреждение высшего образования}\\
-\mbox{«Национальный исследовательский университет}\\
-\mbox{«Московский институт электронной техники»}\par}};
-\node[inner sep=0pt] at ([yshift=-20.8mm]current page.north) {{\fontsize{8.5}{10.2}\selectfont Институт биомедицинских систем}};
-\node[inner sep=0pt] at ([yshift=-33.8mm]current page.north) {{\fontsize{14}{17}\selectfont Гуслянцев Егор Евгеньевич}};
-\node[inner sep=0pt] at ([yshift=-52mm]current page.north) {\parbox{\dimexpr\paperwidth-12mm\relax}{\centering\fontsize{15}{17.5}\selectfont\bfseries\setlength{\parskip}{0pt}%
-\mbox{Нанокомпозитный припой для лазерной сварки}\\
-\mbox{биологических тканей}\par}};
-\node[anchor=east,inner sep=0pt] at ([xshift=-9mm,yshift=13.8mm]current page.south east) {{\fontsize{8.5}{10.2}\selectfont Руководитель: к.ф.-м.н., доцент Потапов Д.А.}};
-\node[inner sep=0pt] at ([yshift=4mm]current page.south) {{\fontsize{8.5}{10.2}\selectfont Москва 2026}};
+\node[anchor=north,inner sep=0pt] at ([yshift=-3.3mm]current page.north) {\parbox{\dimexpr\paperwidth-12mm\relax}{\centering\fontsize{8.5}{10.2}\selectfont\setlength{\parskip}{0pt}
+МИНОБРНАУКИ РОССИИ\\[2pt]
+Федеральное государственное автономное образовательное учреждение высшего образования\\
+«Национальный исследовательский университет\\
+«Московский институт электронной техники»\par}};
+\node at ([yshift=-20.8mm]current page.north) {{\fontsize{8.5}{10.2}\selectfont Институт биомедицинских систем}};
+\node at ([yshift=-33.8mm]current page.north) {{\fontsize{14}{17}\selectfont Калашников Алексей Дмитриевич}};
+\node at ([yshift=-52mm]current page.north) {\parbox{\dimexpr\paperwidth-14mm\relax}{\centering\fontsize{15}{18}\selectfont\bfseries Устройство для беспроводной\\чрескожной передачи энергии\par}};
+\node[anchor=east] at ([xshift=-9mm,yshift=13.8mm]current page.south east) {{\fontsize{8.5}{10.2}\selectfont Руководитель: к.ф.-м.н., доцент Потапов Д.А.}};
+\node at ([yshift=4mm]current page.south) {{\fontsize{8.5}{10.2}\selectfont Москва 2026}};
 \end{tikzpicture}
+\note{Организация и руководитель сохранены по исходному шаблону; отдельно для нового докладчика не подтверждены.}
 \end{frame}
 
-\begin{frame}{Задача исследования и принцип соединения}
-{\centering\small Нанокомпозитный припой для лазерной сварки биологических тканей\par}
+\begin{frame}{Назначение и задача изобретения}
 \begin{itemize}
-\item Задача: сравнить прочность соединений при изменении углеродного наполнителя в БСА.
-\item Объекты: свиная кожа и хрящ бычьей трахеи; \textit{in vitro}.
+\item Назначение: энергообеспечение имплантируемых медицинских приборов без проводного соединения через кожу.
+\item Энергия передаётся посредством индуктивной связи внешней и имплантированной катушек.
+\item Движения пациента и изменение послеоперационного отёка изменяют взаимное положение катушек и условия передачи энергии.
+\item Задача патента: повышение эффективности передачи за счёт определения положения катушек и последующей коррекции.
 \end{itemize}
+\vspace{2mm}
+\smalltext Авторы: А.А. Данилов, Ю.П. Маслобоев, С.В. Селищев, С.А. Терещенко.\\
+Патентообладатель: НИУ МИЭТ. Заявка: 25.09.2012; публикация: 10.04.2014.\\
+Патент RU 2510710 C1 «Устройство для беспроводной чрескожной передачи энергии».
+\src{С.~1, 4.}
+\note{Области применения, перечисленные авторами: кардиостимуляторы, дефибрилляторы, системы вспомогательного кровообращения, кохлеарные имплантаты. Это назначение, а не сведения о клинических испытаниях.}
+\end{frame}
+
+\begin{frame}{Два канала: передача энергии и позиционирование}
 \begin{center}
-\begin{tikzpicture}[node distance=3mm,every node/.append style={draw=black,rectangle,line width=0.4pt}]
-\node[box,text width=29mm](a){Нанесение\\припоя};
-\node[box,text width=29mm,right=of a](b){Сопоставление\\краёв};
-\node[box,text width=29mm,right=of b](c){Облучение\\970 нм};
-\node[box,text width=25mm,right=of c](d){Соединение};
-\draw[arr](a)--(b);\draw[arr](b)--(c);\draw[arr](c)--(d);
-\begin{scope}[shift={(5,-1.5)},every node/.append style={draw=none}]
-\draw[fill=black!8](-2,0)rectangle(-0.08,-0.65);
-\draw[fill=black!8](0.08,0)rectangle(2,-0.65);
-\draw[fill=black!45](-0.08,0.1)rectangle(0.08,-0.65);
-\draw[arr](0,0.8)--(0,0.1);
-\node[anchor=west,font=\scriptsize] at (0.1,0.5){Лазерное излучение};
-\node[anchor=east,font=\scriptsize] at (-2.1,-0.5){Ткань};
-\node[anchor=west,font=\scriptsize] at (2.1,-0.5){Ткань};
-\node[font=\scriptsize] at (0,-0.9){Слой припоя};
-\end{scope}
+\begin{tikzpicture}[node distance=7mm and 23mm]
+\node[box,text width=43mm](tx){Передающая катушка};
+\node[box,text width=43mm,right=of tx](rx){Приёмная катушка};
+\node[box,text width=43mm,below=of tx](light){Направленный источник света};
+\node[box,text width=43mm,right=of light](det){Позиционно-чувствительный детектор};
+\node[box,text width=43mm,below=of light](ctrl){Внешний блок управления};
+\node[box,text width=43mm,right=of ctrl](data){Беспроводной обмен данными};
+\draw[arr](tx)--node[above,font=\scriptsize]{Магнитное поле}(rx);
+\draw[arr](light)--node[above,font=\scriptsize]{Через ткань}(det);
+\draw[arr](det)--(data);
+\draw[arr](data)--(ctrl);
+\draw[arr](ctrl.west)--++(-0.45,0)|-(tx.west);
 \end{tikzpicture}
 \end{center}
-\figcap{Принцип соединения биологических тканей с применением лазерного припоя.}
-\smalltext БСА — бычий сывороточный альбумин, белковая матрица.\\
-УНТ — углеродные нанотрубки: поглощение излучения и предполагаемое упрочнение.\\
-Температура, указанная авторами как оптимальная: 65–70~°C.
-\par{\fontsize{6.5}{7.5}\selectfont Источник: Герасименко А.\,Ю., Губарьков О.\,В., Ичкитидзе Л.\,П., Подгаецкий В.\,М., Селищев С.\,В., Пономарева О.\,В. Нанокомпозитный припой для лазерной сварки биологических тканей // Известия вузов. Электроника. 2010. №~4(84). С.~33–41.\par}
-\note{Схема условная. Каркас не показан как наблюдённая структура. Клиническое превосходство, стерильность и безрубцовое заживление в работе не проверены.}
+\figcap{Функциональная схема по фиг.~1 патента; источник света расположен снаружи.}
+\smalltext Энергетический канал — индуктивный. Оптический канал измеряет положение, а не обеспечивает основное питание имплантата.
+\src{С.~5–7, фиг.~1.}
+\note{Схема упрощена: источник питания и нагрузка не показаны. Патент допускает перестановку источника и детектора между модулями. Лазер — частный вариант источника.}
 \end{frame}
 
-\begin{frame}{Составы и приготовление припоев}
-\centering Основная прочностная серия: 28 мас.\,\% БСА;\\0,1 мас.\,\% наполнителя при его наличии.
-\smalltext
-\vspace{2mm}
-\begin{tabularx}{\linewidth}{|
-  >{\raggedright\arraybackslash}p{39mm}|
-  >{\raggedright\arraybackslash}p{31mm}|
-  >{\raggedright\arraybackslash}X|}
-\hline
-\textbf{Наполнитель} & \textbf{Обозначение} & \textbf{Характеристика} \\
-\hline
-Без наполнителя & БСА & Альбуминовый контроль \\
-\hline
-Сажа К-354 & БСА + сажа & Углеродный контроль \\
-\hline
-Активированный уголь & БСА + МРАУ &
-Средний размер частиц $\leq10$ мкм \\
-\hline
-Многослойные УНТ МИЭТ & БСА + МУНТ I &
-Наружный диаметр 3–30 нм \\
-\hline
-Многослойные УНТ «Таунит» & БСА + МУНТ II &
-Диаметр 20–40 нм; длина $\geq2$ мкм \\
-\hline
-Однослойные УНТ & БСА + ОУНТ &
-Диаметр $\sim1$ нм; длина $\sim1$ мкм \\
-\hline
-\end{tabularx}
-\begin{tikzpicture}[node distance=2mm,every node/.append style={draw=black,rectangle,line width=0.4pt}]
-\node[box,text width=19mm,font=\scriptsize](a){БСА + вода};
-\node[box,text width=23mm,font=\scriptsize,right=of a](b){Механическое перемешивание};
-\node[box,text width=35mm,font=\scriptsize,right=of b](c){Декантирование, выдержка, фильтрование};
-\node[box,text width=21mm,font=\scriptsize,right=of c](d){Введение наполнителя};
-\node[box,text width=26mm,font=\scriptsize,right=of d](e){УЗ-обработка; контроль температуры};
-\foreach \x/\y in {a/b,b/c,c/d,d/e}\draw[arr](\x)--(\y);
-\end{tikzpicture}
-\figcap{Последовательность приготовления припоя.}
-\raggedright\scriptsize Описанная процедура относится к 25\%-ной дисперсии БСА, а не к составу основной прочностной серии.
-\src{С.~35–36, 39.}
-\note{8,33 г БСА на 25 мл воды; перемешивание 3 ч при температуре не выше 30 °C; выдержка 12 ч. Способ перехода к 28\%-ному составу не реконструировать.}
-\end{frame}
-
-\begin{frame}{Оптические свойства и стабильность}
+\begin{frame}{Оптическое определение линейного смещения}
 \begin{columns}[T,onlytextwidth]
-\begin{column}{0.49\linewidth}
-\centering\pngimage{\SpectrumImage}{43mm}
-\scriptsize УНТ: 0,3 мас.\,\%; слой 1 мм.\\
-1 — «НаноКарбонЛайт» (ОУНТ);\\2 — «Таунит» (МУНТ II); 3 — МИЭТ (МУНТ I).
-\vspace{2mm}
-\figcap{Спектры поглощения припоев с УНТ.}
+\begin{column}{0.54\linewidth}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\draw[fill=black!7](-2,0)rectanglerectangle(2,1.4);
+\node[font=\scriptsize] at (1.1,0.7){Ткань};
+\draw[very thick](-2,1.8)--(2,1.8);
+\draw[very thick](-2,-0.3)--(2,-0.3);
+\node[draw,fill=white,font=\scriptsize] at (-0.7,1.8){Источник};
+\draw[arr](-0.7,1.55)--(-0.7,-0.2);
+\draw[dashed](-0.7,1.4)--(-1.7,0);
+\draw[dashed](-0.7,1.4)--(0.3,0);
+\draw[dotted](0,-0.4)--(0,2.15);
+\node[font=\scriptsize] at (0.7,2.15){Ось приёмной катушки};
+\draw[<->](-0.7,-0.65)--node[below,font=\scriptsize]{Смещение $\Delta x$}(0,-0.65);
+\node[font=\scriptsize] at (0,-1.15){Плоскость детектора};
+\end{tikzpicture}
+\end{center}
+\figcap{Условная геометрия линейного смещения.}
 \end{column}
-\begin{column}{0.49\linewidth}
+\begin{column}{0.44\linewidth}
 \smalltext
-\begin{tabularx}{\linewidth}{|
-  >{\raggedright\arraybackslash}p{18mm}|
-  >{\raggedright\arraybackslash}X|}
-\hline
-\textbf{Испытание} & \textbf{Условия и наблюдения} \\
-\hline
-Термо- &
-936 ч при комнатной температуре;
-отдельное испытание при 42~°C.
-Спектры изменились незначительно. \\
-\hline
-Фото- &
-Светодиод $\sim630$ нм; 65 мВт; 83 ч.
-Небольшие изменения спектров после облучения. \\
-\hline
-\end{tabularx}
-\scriptsize Серия стабильности: 25\% БСА + 0,3 мас.\,\% «Таунит».\\[2mm]
-При 42~°C: 85 ч в тексте; 83 ч в подписи к рис.~1 исходной статьи.\\[2mm]
-\small Оценивались изменения спектров, а не биологическая безопасность.
+\begin{enumerate}
+\item Узкий пучок рассеивается в коже и подкожной ткани.
+\item Детектор регистрирует пространственное распределение интенсивности.
+\item По координате максимума и известной геометрии оценивают смещение катушек.
+\end{enumerate}
+\vspace{2mm}
+При параллельных плоскостях и соосной установке источник–катушка, детектор–катушка:
+\[\Delta x=x_{\max}-x_0.\]
+\scriptsize $x_0$ — координата при согласованном положении. Формула поясняет геометрию; в патенте явно не приведена.
 \end{column}
 \end{columns}
-\src{С.~36–38, рис.~1, 3, 4 исходной статьи.}
-\note{Различия поглощения авторы связывают со степенью очистки УНТ, что не доказывает механизм упрочнения. Светодиод 630 нм не эквивалентен лазеру 970 нм.}
+\src{С.~5, фиг.~2.}
+\note{Совпадение максимума с проекцией оси источника — предпосылка описанной модели. Для неоднородной ткани её требуется проверять. По одному максимуму нельзя утверждать полное восстановление всех пространственных координат.}
 \end{frame}
 
-\begin{frame}{Лазерная сварка и измерение прочности}
+\begin{frame}{Угловое смещение и обратная связь}
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.47\linewidth}
-\centering\pngimage{\WeldingImage}{36mm}
-\begin{columns}[T,onlytextwidth]
-\begin{column}{0.45\linewidth}
-\centering\small (а)
-\end{column}
-\begin{column}{0.55\linewidth}
-\centering\small (б)
-\end{column}
-\end{columns}
-\vspace{2mm}
-\raggedright\scriptsize Иллюстративная серия: 25\% БСА + 0,3 мас.\,\% «Таунит». Чёрный цвет обусловлен припоем.
-\par\vspace{2mm}\smalltext Образцы: 30–33 $\times$ 2–4 $\times$ 0,5–1,5 мм; хранение в формалине.
-\vspace{2mm}
-\figcap{Лазерная сварка бычьего хряща: (а) облучение образца; (б) вид соединения.}
-\end{column}
-\begin{column}{0.51\linewidth}
-\smalltext Непрерывный диодный лазер: 970 нм; 5–15 Вт на выходе волокна; 2–5 мин.\\
-Контроль ИК-пирометром: 65–70~°C.
-\begin{center}
-\begin{tikzpicture}[x=0.82cm,y=0.8cm]
-\draw[draw=none,fill=black!30](-2,0)rectangle(-1.6,0.8);
-\draw[draw=none,fill=black!30](1.6,0)rectangle(2,0.8);
-\draw[draw=none,fill=black!8](-1.6,0.2)rectangle(1.6,0.6);
-\draw[very thick](0,0.2)--(0,0.6);
-\draw[arr](-2,0.4)--(-2.9,0.4)node[left]{$F$};
-\draw[arr](2,0.4)--(2.9,0.4)node[right]{$F$};
-\draw[arr](0.7,1.2)node[above,font=\scriptsize]{Сечение $S$}--(0,0.65);
-\end{tikzpicture}
-\end{center}
-\figcap{Схема измерения прочности при растяжении.}
-\vspace{1mm}
-\begin{equation}
-  \sigma=\frac{F_{\max}}{S}
-\end{equation}
-\vspace{-3mm}
-\par\scriptsize
-где $F_{\max}$ — максимальная сила,
-$S$ — площадь сечения разреза.
-\vspace{2mm}
-\par Не менее пяти образцов на вариант.
-Контроль — неразрезанная ткань.
-\end{column}
-\end{columns}
-\src{С.~37–39.}
-\note{Без площади пятна плотность мощности не вычисляется. В подписи исходной статьи фотография ошибочно названа рис. 4; в тексте — рис. 5. Номера иллюстраций на слайдах независимы от номеров статьи.}
-\end{frame}
-
-\begin{frame}{Влияние наполнителя на прочность}
-\centering\small 28 мас.\,\% БСА; 0,1 мас.\,\% наполнителя при его наличии.
-\begin{columns}[T,onlytextwidth]
-\begin{column}{0.49\linewidth}
-{\raggedright а)\par}
-\centering
-\begin{tikzpicture}
-\begin{axis}[width=7.15cm,height=4.1cm,xmin=0,xmax=2.5,ymin=-0.6,ymax=5.6,y dir=reverse,
-ytick={0,1,2,3,4,5},yticklabels={БСА,БСА + сажа,БСА + МРАУ,БСА + МУНТ I,БСА + МУНТ II,БСА + ОУНТ},
-tick label style={font=\tiny},xlabel={\scriptsize Прочность, МПа},xtick={0,0.5,1,1.5,2,2.5},
-axis x line*=bottom,axis y line*=left,xmajorgrids,grid style={black!12},bar width=9pt,bar shift=0pt,
-error bars/x dir=both,error bars/x explicit]
-\addplot[xbar,fill=black!25,draw=none] coordinates {(0.4,0) +- (0.1,0)};
-\addplot[xbar,fill=black!45,draw=none] coordinates {(0.3,1) +- (0.1,0) (0.2,2) +- (0.1,0)};
-\addplot[xbar,fill=black!75,draw=none] coordinates {(1.4,3) +- (0.3,0) (1.2,4) +- (0.3,0) (0.8,5) +- (0.3,0)};
-\end{axis}\end{tikzpicture}\end{column}
-\begin{column}{0.49\linewidth}
-{\raggedright б)\par}
-\centering
-\begin{tikzpicture}
-\begin{axis}[width=7.15cm,height=4.1cm,xmin=0,xmax=2.5,ymin=-0.6,ymax=5.6,y dir=reverse,
-ytick={0,1,2,3,4,5},yticklabels={БСА,БСА + сажа,БСА + МРАУ,БСА + МУНТ I,БСА + МУНТ II,БСА + ОУНТ},
-tick label style={font=\tiny},xlabel={\scriptsize Прочность, МПа},xtick={0,0.5,1,1.5,2,2.5},
-axis x line*=bottom,axis y line*=left,xmajorgrids,grid style={black!12},bar width=9pt,bar shift=0pt,
-error bars/x dir=both,error bars/x explicit]
-\addplot[xbar,fill=black!25,draw=none] coordinates {(0.9,0) +- (0.3,0)};
-\addplot[xbar,fill=black!45,draw=none] coordinates {(0.6,1) +- (0.2,0) (0.5,2) +- (0.2,0)};
-\addplot[xbar,fill=black!75,draw=none] coordinates {(1.9,3) +- (0.5,0) (1.4,4) +- (0.4,0) (1.7,5) +- (0.5,0)};
-\end{axis}\end{tikzpicture}\end{column}
-\end{columns}
-\figcap{Влияние наполнителя на прочность соединений: (а) свиная кожа; (б) бычий хрящ.}
-\raggedright\small УНТ повышают среднюю прочность относительно БСА; сажа и МРАУ её снижают.
-\par\scriptsize Статистический смысл интервалов разброса не указан. Статистическое превосходство отдельных нанотрубочных составов не установлено.
-\src{С.~39, таблица.}
-\end{frame}
-\begin{frame}{Сравнение с прочностью исходной ткани}
-\centering\small Доля прочности контрольной ткани: $100\,\sigma/\sigma_{\text{т}}$.
-\begin{columns}[T,onlytextwidth]
-\begin{column}{0.49\linewidth}
-{\raggedright а)\par}
-\centering
-\resizebox{0.98\linewidth}{!}{%
-\begin{tikzpicture}
-\begin{axis}[width=7.15cm,height=4.1cm,xmin=0,xmax=100,ymin=-0.6,ymax=2.6,y dir=reverse,
-ytick={0,1,2},yticklabels={БСА,БСА + МУНТ I,Ткань},tick label style={font=\scriptsize},
-xlabel={\scriptsize Доля прочности ткани, \%},xtick={0,25,50,75,100},axis x line*=bottom,axis y line*=left,
-xmajorgrids,grid style={black!12},bar width=15pt,bar shift=0pt]
-\addplot[xbar,fill=black!25,draw=none] coordinates {(2.7,0)};
-\node[anchor=west,font=\tiny] at(axis cs:5.7,0){2,7\%; $0{,}4\pm0{,}1$ МПа};
-\addplot[xbar,fill=black!75,draw=none] coordinates {(9.3,1)};
-\node[anchor=west,font=\tiny] at(axis cs:12.3,1){9,3\%; $1{,}4\pm0{,}3$ МПа};
-\addplot[xbar,fill=black!10,draw=none] coordinates {(100,2)};
-\node[font=\tiny] at(axis cs:53,2){100\%; $15\pm5$ МПа};
-\end{axis}
-\end{tikzpicture}%
-}
-\par
-\end{column}
-\begin{column}{0.49\linewidth}
-{\raggedright б)\par}
-\centering
-\resizebox{0.98\linewidth}{!}{%
-\begin{tikzpicture}
-\begin{axis}[width=7.15cm,height=4.1cm,xmin=0,xmax=100,ymin=-0.6,ymax=2.6,y dir=reverse,
-ytick={0,1,2},yticklabels={БСА,БСА + МУНТ I,Ткань},tick label style={font=\scriptsize},
-xlabel={\scriptsize Доля прочности ткани, \%},xtick={0,25,50,75,100},axis x line*=bottom,axis y line*=left,
-xmajorgrids,grid style={black!12},bar width=15pt,bar shift=0pt]
-\addplot[xbar,fill=black!25,draw=none] coordinates {(15,0)};
-\node[anchor=west,font=\tiny] at(axis cs:18,0){15\%; $0{,}9\pm0{,}3$ МПа};
-\addplot[xbar,fill=black!75,draw=none] coordinates {(32,1)};
-\node[anchor=west,font=\tiny] at(axis cs:35,1){32\%; $1{,}9\pm0{,}5$ МПа};
-\addplot[xbar,fill=black!10,draw=none] coordinates {(100,2)};
-\node[font=\tiny] at(axis cs:53,2){100\%; $6\pm2$ МПа};
-\end{axis}
-\end{tikzpicture}%
-}
-\par
-\end{column}
-\end{columns}
-\figcap{Прочность соединений относительно контрольной ткани: (а) свиная кожа; (б) бычий хрящ.\\Указаны доля прочности и абсолютные значения.}
-\raggedright\small Упрочнение относительно БСА не означает достижения прочности исходной ткани.
-\par\scriptsize Проценты приведены по таблице статьи. Контроль — неразрезанная ткань, а не хирургический шов. Заживление не исследовалось.
-\src{С.~39, таблица.}
-\end{frame}
-
-\begin{frame}{Механизм: наблюдение и гипотеза}
-\begin{columns}[T,onlytextwidth]
-\begin{column}{0.48\linewidth}
-\centering\textbf{Экспериментальные наблюдения}\par\raggedright
+\smalltext Признак углового рассогласования, предложенный авторами:
 \begin{itemize}
-\item Более высокие средние значения прочности при введении УНТ.
-\item Отсутствие аналогичного эффекта у сажи и МРАУ.
-\item Различный порядок нанотрубочных составов для двух тканей.
+\item плоскости катушек не параллельны;
+\item распределение интенсивности асимметрично относительно максимума;
+\item корректировка положения продолжается до восстановления симметрии.
 \end{itemize}
+\vspace{2mm}
+Условие описанного варианта: ось источника перпендикулярна плоскости передающей катушки.
 \end{column}
-\begin{column}{0.49\linewidth}
-\centering\textbf{Гипотеза авторов}\par
-\begin{tikzpicture}[node distance=3mm,every node/.append style={draw=black,rectangle,line width=0.4pt}]
-\node[box,text width=58mm](a){Лазерная обработка};
-\node[box,text width=58mm,below=of a](b){Структурирование УНТ};
-\node[box,text width=58mm,below=of b](c){Каркас с взаимодействующим альбумином};
-\node[box,text width=58mm,below=of c](d){Упрочнение слоя};
-\foreach \x/\y in {a/b,b/c,c/d}\draw[arr,dashed](\x)--(\y);
+\begin{column}{0.50\linewidth}
+\centering
+\begin{tikzpicture}[node distance=4mm]
+\node[box,text width=60mm](a){Измерение распределения};
+\node[box,text width=60mm,below=of a](b){Передача данных во внешний блок};
+\node[box,text width=60mm,below=of b](c){Оценка рассогласования};
+\node[box,text width=60mm,below=of c](d){Коррекция положения катушки и параметров возбуждения};
+\draw[arr](a)--(b);\draw[arr](b)--(c);\draw[arr](c)--(d);
 \end{tikzpicture}
-\figcap{Предполагаемая последовательность упрочнения слоя припоя.}
+\figcap{Последовательность коррекции по описанию патента.}
 \end{column}
 \end{columns}
-\vspace{2mm}\small Прямого подтверждения каркаса в данной работе не представлено.
-\par Механические измерения не разделяют вклад поглощения, нагрева и армирования.
-\src{С.~39–40.}
-\note{Схема — модель, а не экспериментальная микрофотография. Авторы отмечают возможную недостаточность предложенного объяснения.}
+\vspace{2mm}\smalltext Реализация механического привода и количественный алгоритм восстановления угла в патенте не раскрыты.
+\src{С.~5–6.}
+\note{Асимметрия не должна объявляться однозначным измерителем угла в реальных неоднородных тканях. Авторы описывают принцип коррекции, но не подтверждают полностью автоматическое позиционирование.}
 \end{frame}
 
-\begin{frame}{Ограничения и результаты}
-\smalltext
-\begin{tabularx}{\linewidth}{|
-  >{\raggedright\arraybackslash}p{74mm}|
-  >{\raggedright\arraybackslash}X|}
+\begin{frame}{Расчёт распространения оптического излучения}
+\smalltext В патенте приведено сечение расчётного пространственного распределения интенсивности после прохождения рассеивающего слоя.
+\vspace{3mm}
+\begin{tabularx}{\linewidth}{|p{65mm}|X|}
 \hline
-\textbf{Ограничение} & \textbf{Следствие} \\
+Параметр & Значение по описанию \\
 \hline
-\textit{In vitro}; хранение в формалине &
-Нет прямого переноса на живые ткани \\
+Толщина слоя & 5 мм \\
 \hline
-Режим облучения менялся с составом &
-Сравнивается сочетание состава и обработки \\
+Коэффициент рассеяния & $2\ \text{мм}^{-1}$ \\
 \hline
-Не менее пяти образцов;
-смысл $\pm$ не уточнён;
-нет проверки значимости &
-Статистическое превосходство составов не установлено \\
+Коэффициент поглощения & $0{,}002\ \text{мм}^{-1}$ \\
 \hline
-Нет оценки биологической реакции,
-герметичности, циклической и длительной прочности &
-Клиническая применимость не установлена \\
+Метод расчёта & Уточнённая диффузионная модель \\
+\hline
+Изменение интенсивности при увеличении расстояния от центра на 0,5 мм & 5–15\% по тексту патента \\
 \hline
 \end{tabularx}
-\par
+\vspace{3mm}
+Рисунок 3 патента — результат моделирования, а не экспериментальное измерение на пациенте.\\
+Точная длина волны источника и полная процедура расчёта в описании не указаны.
+\src{С.~6, фиг.~3.}
+\note{Не подменять коэффициент рассеяния приведённым коэффициентом рассеяния: фактор анизотропии не дан. График не оцифрован; произвольная гауссова кривая не выдаётся за исходные данные. Значение 5–15 процентов передаётся как утверждение текста, а не как универсальный наклон профиля.}
+\end{frame}
+
+\begin{frame}{Точность: расчётная оценка и предельный случай}
+\smalltext
+\begin{tabularx}{\linewidth}{|p{37mm}|p{34mm}|X|}
+\hline
+Уровень оценки & Значение & Основание и статус \\
+\hline
+Магнитный прототип & 0,5–1 мм & Характеристика прототипа в изложении авторов патента \\
+\hline
+Оптический способ & 0,5 мм & Оценка авторов при регистрации изменений интенсивности порядка 5\% \\
+\hline
+Идеальный предел & Порядка 1 мкм & Предположение об ограничении размером ячейки детектора \\
+\hline
+\end{tabularx}
+\vspace{3mm}
+\begin{itemize}
+\item Для оценки 0,5 мм не приведены результаты серии измерений и бюджет погрешностей.
+\item Размер ячейки сам по себе не подтверждает микрометровую точность через ткань.
+\item В документе отсутствуют данные о воспроизводимости и устойчивости к неоднородности ткани.
+\end{itemize}
+\src{С.~5–6.}
+\note{0,5 мм совпадает с лучшей границей приведённого диапазона прототипа; гарантированное превосходство по точности не установлено. Не заявлять улучшение в 500 раз: сравнивались бы разные уровни обоснования.}
+\end{frame}
+
+\begin{frame}{Сопоставление с магнитным прототипом}
+\smalltext
+\begin{tabularx}{\linewidth}{|p{36mm}|X|X|}
+\hline
+Признак & Прототип US 5314453 & Предлагаемое устройство \\
+\hline
+Позиционирование & Постоянный магнит и магнитный датчик & Направленный свет и позиционно-чувствительный детектор \\
+\hline
+Рабочая частота передачи энергии & Не ниже 2 МГц по описанию авторов & Возможность диапазона 100–500 кГц \\
+\hline
+Ограничение канала & Воздействие магнитных полей; потери в магните & Рассеяние и поглощение света тканью; требования к регистрации \\
+\hline
+Обратная связь & Магнитное определение положения & Оптическая регистрация и беспроводной обмен данными \\
+\hline
+\end{tabularx}
+\vspace{3mm}
+Диапазон 100–500 кГц относится к индуктивной передаче энергии, а не к оптическому излучению.\\
+Численные значения КПД и экспериментальное сравнение устройств в патенте не приведены.
+\src{С.~4–6. Прототип рассмотрен по изложению в RU 2510710 C1.}
+\note{Заявление об оптимальности диапазона относится к аргументации авторов и цитируемым ими исследованиям, а не ко всем возможным системам. Оптический принцип не исключает электромагнитных помех в электронике детектора и телеметрии.}
+\end{frame}
+
+\begin{frame}{Ограничения и выводы}
+\smalltext
+\begin{tabularx}{\linewidth}{|p{67mm}|X|}
+\hline
+Не представлены в описании & Что требуется для проверки \\
+\hline
+Прямые измерения точности и КПД & Стендовое сравнение при заданных смещениях \\
+\hline
+Характеристики источника и детектора, бюджет шума & Выбор компонентов и калибровка \\
+\hline
+Оценка неоднородности ткани и движений & Испытания на моделях ткани и биологических образцах \\
+\hline
+Оценка нагрева и оптической безопасности & Проверка допустимых режимов воздействия \\
+\hline
+\end{tabularx}
 \vspace{2mm}
-\par\textbf{Результаты:}
 \begin{enumerate}
-\item УНТ повышают среднюю прочность относительно БСА в исследованных условиях.
-\item Наибольшие средние значения — с МУНТ I: 1,4 МПа для кожи и 1,9 МПа для хряща; 9,3\% и 32\% прочности контрольных тканей.
-\item Следующие задачи: сопоставимые режимы облучения, проверка структуры, исследования на живых тканях.
+\item Предложено сочетание индуктивной передачи энергии с оптическим определением взаимного положения катушек.
+\item Измеренная информация предназначена для коррекции положения и параметров возбуждения передающей катушки.
+\item Повышение эффективности — заявленный технический результат; количественное подтверждение требует испытаний.
 \end{enumerate}
-\src{С.~37–40.}
-\note{Отсутствие испытаний не доказывает небезопасность. Клиническая готовность и превосходство над хирургическим швом не установлены.}
+\src{С.~5–7. Ограничения сформулированы по составу представленных данных.}
+\note{Патент содержит один независимый и четыре зависимых пункта формулы. Лазер указан только в зависимом пункте 2. Отсутствие данных не доказывает неработоспособность или небезопасность.}
 \end{frame}
 \end{document}
